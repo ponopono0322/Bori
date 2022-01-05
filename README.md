@@ -1,7 +1,7 @@
-# SNS 리뷰 기반 추천 시스템(Recommended model based on SNS review)
+# SNS 리뷰 기반 장소 추천 시스템(in 제주)
 
 ## Introduction
-사용자가 원하는 키워드를 입력하면 장소를 추천해주는 모델입니다(이 모델은 제주도 한정입니다). 입력받을 수 있는 키워드의 항목을 정리하면 다음과 같습니다.
+사용자가 원하는 키워드를 입력하면 장소를 추천해주는 모델입니다(이 모델의 기반 데이터는 제주도입니다). 입력받을 수 있는 키워드의 항목을 정리하면 다음과 같습니다.
 1. 좋았다, 나빴다를 비롯한 역대급, 최고, 최악 등의 감정을 나타내는 형용사
 2. 부모님, 지인, 반려동물 등 수를 나타내는 명사
 3. 휴양지, 관광지, 음식점 등의 장소 자체의 업종 분류를 나타내는 명사
@@ -16,6 +16,28 @@ folium==0.12.1
 gensim==4.0.1
 scikit-learn==0.18.1
 pandas==1.3.0
+```
+
+## Directory
+```
+Bori
+├─── 연습포함
+│   ├─── 안쓰는것들     # not important in this project, but used in data analysis
+│   └─── 크롤링 데이터  # crawling data of visitjeju.net
+├─── 제출용
+│   ├─── list
+│   │    ├─── jeju_hashtags_instagram_revised.xml       # Hannanum pos in instagram noun count
+│   │    ├─── jeju_hashtags_instagram_token_Han.xml     # Hannanum pos in instagram 
+│   │    ├─── top_10.csv                                # output data
+│   │    ├─── 관광지목록.csv                            # tour list from visitjeju.net
+│   │    ├─── 모두포함.csv                              # similarity data
+│   │    └─── 수정된파일.csv                            # tag data from visitjeju.net
+│   ├─── 크롤링 데이터                                  # crawling data of visitjeju.net
+│   ├─── AutoCrow.ipynb                                 # crawling visitjeju.net
+│   ├─── BlogCrawl.ipynb                                # crawling naver.com
+│   └─── Final_code.ipynb                               # result code
+├─── Flow.png           # Sequence png
+└─── README.md          # readme.md
 ```
 
 ## Output
@@ -76,7 +98,7 @@ ending(driver)
 |:-------:|:-----:|
 |[AutoCrow.ipynb](./연습포함/AutoCrow.ipynb)|비짓제주|
 |[BlogCrawl.ipynb](./연습포함/BlogCrawl.ipynb)|네이버|
-|[크롤링_review.ipynb](./연습포함/크롤링_review.ipynb)|네이버|
+|[크롤링_review.ipynb](./연습포함/크롤링_review.ipynb)|트립어드바이저|
 
 ## Cleaning
 중복된 링크나 비공개글을 제외하는 작업을 거쳤습니다.
@@ -93,7 +115,7 @@ data2.drop('Unnamed: 0', axis=1, inplace=True)
 |:-------:|:-----:|
 |[conv_list.ipynb](./연습포함/conv_list.ipynb)|중복링크 제거|
 
-## Stemming
+## Part-of-speech
 사이트로부터 얻은 텍스트에서 명사만 추출하는 작업을 수행하였습니다.
 ```python
 n=0
